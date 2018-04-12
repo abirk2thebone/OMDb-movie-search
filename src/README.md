@@ -1,0 +1,1 @@
+Sort and filter movie searches with the use of OMDb API
