@@ -18,24 +18,37 @@ class App extends Component {
     this.state = {movies:[]}
   }
 
-  optionsSort = [{ value: 'one', label: 'Choose a sorting option' }, { value: 'two', label: 'Year' }]
-  optionsFilter = [{ value: 'one', label: 'Choose a filtering option' }, { value: 'two', label: '2005 onwards' }]
+  optionsSort = [
+  { value: 'one', label: 'Choose a sorting option' }, 
+  { value: 'two', label: 'Year' }, 
+  { value: 'three', label: 'Title' }]
+
+  optionsFilter = [
+  { value: 'one', label: 'Choose a filtering option' }, 
+  { value: 'two', label: '1990 and onwards' }, 
+  { value: 'three', label: '2005 and onwards'}]
   
-  search = async () => {
-    const response = await axios(`http://www.omdbapi.com/?apikey=63175308&s=${this.state.search}`)
+  search = async (movieSearch) => {
+    console.log(movieSearch)
+    const response = await axios(`http://www.omdbapi.com/?apikey=63175308&s=${movieSearch}`)
     this.setState({movies:response.data.Search})
-    console.log("state",this.state)
   }
 
   sortSelection = (selection) => {
     if (selection.value === 'two') {
       this.setState({movies:_.sortBy(this.state.movies, 'Year')})
     }
+    else if (selection.value === 'three'){
+      this.setState({movies:_.sortBy(this.state.movies, 'Title')})
+    }
   }
 
 
   filterSelection = (selection) => {
     if (selection.value === 'two') {
+     this.setState({movies:_.filter(this.state.movies, movie => movie.Year >= 1990)})
+    }
+    else if (selection.value === 'three'){
      this.setState({movies:_.filter(this.state.movies, movie => movie.Year >= 2005)})
     }
   }
@@ -44,8 +57,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <input placeholder="Search movie" onChange = {e => this.setState({search:e.target.value})}/> 
-      <button onClick = {this.search}> Search </button>
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>      
+      <div className="box">
+      <div className="container-1">
+      <span className="icon"><i className="fa fa-search"></i></span>
+      <input type="search" id="search" placeholder="Search movie" onKeyPress = {e => {if (e.key === 'Enter'){ {this.search(e.target.value)}}}} />
+      </div>
+      </div>
       <div className="filter-lists">
       <Dropdown options={this.optionsSort} onChange={this.sortSelection} value={this.optionsSort[0]} />
       <Dropdown options={this.optionsFilter} onChange={this.filterSelection} value={this.optionsFilter[0]} />

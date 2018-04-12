@@ -1,8 +1,8 @@
 body {
-  margin: 0;
+  margin: 10;
   padding: 0;
   font-family: sans-serif;
-  background-color: beige
+  background: #b2d2f1;
 }
 
 .filter-lists{
@@ -10,4 +10,46 @@ body {
   flex-direction: row;
   justify-content: center;
 
+}
+
+input {
+  width: 125px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+
+.box{
+  justify-content: center;
+  margin: 100px auto;
+  width: 600px;
+  height: 100px;
+}
+
+.container-1 input#search{
+  justify-content: center;
+  width: 300px;
+  height: 50px;
+  background: #ffffff;
+  border: none;
+  font-size: 14pt;
+  padding-left: 100px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 5px;
+}
+
+
+.container-1 .icon{
+  position: absolute;
+  top: 17.6%;
+  margin-left: 30px;
+  margin-top: 17px;
+  z-index: 1;
+  color: #8e959b;
+}
+
+.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+  outline:none;
+  background: #ffffff;
 }
